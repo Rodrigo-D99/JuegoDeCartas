@@ -1,12 +1,11 @@
-package mazoDeCartas;
+package JuegoDeCartas.src.main.java.mazoDeCartas;
 
 import java.util.HashMap;
 
 public class Carta{
     private String nomPersonaje;
     private HashMap<String,Integer> atributos;
-
-
+    
     public Carta(String nomPersonaje) {
         this.setNomPersonaje(nomPersonaje);
         this.atributos=new HashMap<>();

@@ -1,4 +1,4 @@
-package mazoDeCartas;
+package JuegoDeCartas.src.main.java.mazoDeCartas;
 
 import java.util.ArrayList;
 
@@ -6,6 +6,12 @@ public class Mazo{
    private ArrayList<Carta> cartas;
    private ArrayList<String> atributosObligatorios;
    private int cantMaxAtributos;
+
+    public Mazo(ArrayList<Carta> cartas, ArrayList<String> atributosObligatorios, int cantMaxAtributos) {
+        this.cartas = cartas;
+        this.atributosObligatorios = atributosObligatorios;
+        this.cantMaxAtributos = cantMaxAtributos;
+    }
 
     public Mazo(int cantMaxAtributos) {
         this.cartas=new ArrayList<>();
@@ -41,10 +47,25 @@ public class Mazo{
     }
 
     public void addCartas(Carta c){
-        if (isAtributoPresente()&&isCantAtributosCorrecta())
+        //if (isAtributoPresente()&&isCantAtributosCorrecta())
             cartas.add(c);
     }
-
+    public void isCartaEsCorrecta(){
+        ArrayList<Carta>aux=new ArrayList<>();
+        for (Carta c:cartas){
+            if(!c.isCantAtributosCorrecta(cantMaxAtributos)){
+                aux.add(c);
+            }
+            else{
+                for (String s:atributosObligatorios) {
+                    if (!c.isAtributoPresente(s)){
+                        aux.add(c);
+                        break;
+                    }
+                }
+            }
+        }
+    }
     public boolean isCantAtributosCorrecta(){
         for (Carta c:cartas){
             if (c.isCantAtributosCorrecta(cantMaxAtributos))
@@ -65,6 +86,9 @@ public class Mazo{
         return false;
     }
 
+    public void borrarCarta(Carta c){
+        cartas.remove(c);
+    }
 
     /*public void mezclar(){
         int posAleatoria=0;
@@ -82,5 +106,12 @@ public class Mazo{
         }
     }*/
 
-
+    @Override
+    public String toString() {
+        return "Mazo{" +
+                "cartas=" + cartas +
+                ", atributosObligatorios=" + atributosObligatorios +
+                ", cantMaxAtributos=" + cantMaxAtributos +
+                '}';
+    }
 }

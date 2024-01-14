@@ -1,14 +1,18 @@
-package mazoDeCartas;
+package JuegoDeCartas.src.main.java.mazoDeCartas;
 
 
 public class Jugador {
 
     private String nombre;
     private Mazo miniMazo;
-
-    public Jugador(String nombre, Mazo miniMazo) {
+    public Jugador(int cantAtributos) {
         this.setNombre(nombre);
-        this.miniMazo = miniMazo;
+        this.miniMazo = new Mazo(cantAtributos);
+    }
+
+    public String getAtributoElegido() {
+        int atributoAleatroio= (int) (Math.random()*miniMazo.getAtributosObligatorios().size());
+        return miniMazo.getAtributosObligatorios().get(atributoAleatroio);
     }
 
     public String getNombre() {
@@ -23,14 +27,25 @@ public class Jugador {
         return miniMazo;
     }
 
-
-    public void addCarta(Juego c){
-
-        //??????????
-        for (int i = 0; i < c.mezclarYrepartir().size(); i++) {
-            for (int j = 0; j < c.mezclarYrepartir().get(i).size(); j++) {
-                miniMazo.addCartas(c.mezclarYrepartir().get(i).get(j));
-            }
-        }
+    public void setMiniMazo(Mazo miniMazo) {
+        this.miniMazo = miniMazo;
     }
+
+    public Integer obtenerValorCarta(String a){
+        return this.miniMazo.getCartas().getFirst().getAtributos().get(a);
+    }
+    public void addCartaGanada(Carta c){
+        miniMazo.addCartas(c);
+    }
+
+    public void removerCarta(Carta c){
+        miniMazo.borrarCarta(c);
+    }
+
+
+    /*@Override
+    public String toString(){
+        return "El Jugador" + nombre+ "selecciona competir por el atributo: "+getAtributoElegido()+
+                "mazo"+getMiniMazo();
+    }*/
 }
