@@ -1,5 +1,6 @@
 package JuegoDeCartas.src.main.java.mazoDeCartas;
 
+
 public class Main {
     public static void main(String[] args) {
         //se crean las cartas
@@ -15,7 +16,7 @@ public class Main {
 
         c.addAtributos("Fuerza",3000);
         c.addAtributos("Inteligencia",300);
-        c.addAtributos("Velocidad",2500);
+        c.addAtributos("Velocidad",1);
         c.addAtributos("Altura",185);
 
         c1.addAtributos("Fuerza",2600);
@@ -69,23 +70,44 @@ public class Main {
         mazo.addAtributosObligatorios("Velocidad");
         mazo.addAtributosObligatorios("Altura");
         //System.out.println(mazo.isAtributoPresente()+" "+mazo.isCantAtributosCorrecta());
-        //System.out.println(mazo);
 
         //se crean los jugadores
         Jugador j1=new Jugador(4);
         Jugador j2=new Jugador(4);
         j1.setNombre("rodrigo");
         j2.setNombre("almen");
+
+        j1.getMiniMazo().addAtributosObligatorios("Fuerza");
+        j1.getMiniMazo().addAtributosObligatorios("Inteligencia");
+        j1.getMiniMazo().addAtributosObligatorios("Velocidad");
+        j1.getMiniMazo().addAtributosObligatorios("Altura");
+
+        j2.getMiniMazo().addAtributosObligatorios("Fuerza");
+        j2.getMiniMazo().addAtributosObligatorios("Inteligencia");
+        j2.getMiniMazo().addAtributosObligatorios("Velocidad");
+        j2.getMiniMazo().addAtributosObligatorios("Altura");
+
         System.out.println("nombre de jugador 1: "+j1.getNombre());
         System.out.println("nombre de jugador 2: "+j2.getNombre());
-
 
         //se crea el juego
         Juego juego=new Juego(j1,j2,mazo);
         //juego.play
-        juego.mezclarYrepartir();
-        juego.jugar(j1,j2);
-        //System.out.println("Mazo jugador 1"+j1.getMiniMazo()+" \n"+"Mazo jugador 2"+j2.getMiniMazo());
+        if (!mazo.getCartas().isEmpty())
+            juego.mezclarYrepartir();
+        //System.out.println("\n Mazo jugador 1 "+j1.getMiniMazo()+"\n\n"+"Mazo jugador 2 "+j2.getMiniMazo());
+        for (int i=1;i<juego.getMAXIMO_RONDAS();i++) {
+            if (j1.getMiniMazo().getPrimeraCarta()==null||j2.getMiniMazo().getPrimeraCarta()==null){
+                System.out.println("\nEl juego termino uno de los jugadores no tiene mas cartas");
+                break;
+            }
+            else {
+                System.out.println("------- Ronda " + i + " ----------");
+                juego.jugar(j1, j2);
+            }
+        }
+            //System.out.println("\n Mazo jugador 1 "+j1.getMiniMazo()+"\n\n"+"Mazo jugador 2 "+j2.getMiniMazo());
+
     }
 
 }

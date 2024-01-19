@@ -90,6 +90,12 @@ public class Mazo{
         cartas.remove(c);
     }
 
+    public Carta getPrimeraCarta(){
+        if (this.getCartas().isEmpty()) {
+            return null;
+        }
+        return this.getCartas().getFirst();
+    }
     /*public void mezclar(){
         int posAleatoria=0;
         Carta c;

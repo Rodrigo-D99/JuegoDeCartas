@@ -12,7 +12,7 @@ public class Jugador {
 
     public String getAtributoElegido() {
         int atributoAleatroio= (int) (Math.random()*miniMazo.getAtributosObligatorios().size());
-        return miniMazo.getAtributosObligatorios().get(atributoAleatroio);
+        return this.miniMazo.getAtributosObligatorios().get(atributoAleatroio);
     }
 
     public String getNombre() {
@@ -32,7 +32,7 @@ public class Jugador {
     }
 
     public Integer obtenerValorCarta(String a){
-        return this.miniMazo.getCartas().getFirst().getAtributos().get(a);
+        return this.miniMazo.getPrimeraCarta().getAtributos().get(a);
     }
     public void addCartaGanada(Carta c){
         miniMazo.addCartas(c);
@@ -43,9 +43,9 @@ public class Jugador {
     }
 
 
-    /*@Override
-    public String toString(){
-        return "El Jugador" + nombre+ "selecciona competir por el atributo: "+getAtributoElegido()+
-                "mazo"+getMiniMazo();
-    }*/
+    public String toString(String s) {
+
+        return "La carta de " + nombre + " es " + this.getMiniMazo().getPrimeraCarta().getNomPersonaje() +
+                " con " + this.getMiniMazo().getPrimeraCarta().getAtributos().get(s) + " puntos de " + s;
+    }
 }
