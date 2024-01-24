@@ -12,7 +12,7 @@ public class Main {
         Carta c5=new Carta("trunks");
         Carta c6=new Carta("gohan");
         Carta c7=new Carta("picoro");
-
+        Carta c8=new Carta("aaaaaaaaaa");
 
         c.addAtributos("Fuerza",3000);
         c.addAtributos("Inteligencia",300);
@@ -54,8 +54,16 @@ public class Main {
         c7.addAtributos("Velocidad",800);
         c7.addAtributos("Altura",178);
 
+        c8.addAtributos("Fuerza",1000);
+        c8.addAtributos("Inteligencia",600);
+        c8.addAtributos("Velocidad",800);
+        c8.addAtributos("Altura",178);
         //se crea el mazo
         Mazo mazo=new Mazo(4);
+        mazo.addAtributosObligatorios("Fuerza");
+        mazo.addAtributosObligatorios("Inteligencia");
+        mazo.addAtributosObligatorios("Velocidad");
+        mazo.addAtributosObligatorios("Altura");
         mazo.addCartas(c);
         mazo.addCartas(c1);
         mazo.addCartas(c2);
@@ -64,11 +72,8 @@ public class Main {
         mazo.addCartas(c5);
         mazo.addCartas(c6);
         mazo.addCartas(c7);
-        mazo.isCartaEsCorrecta();
-        mazo.addAtributosObligatorios("Fuerza");
-        mazo.addAtributosObligatorios("Inteligencia");
-        mazo.addAtributosObligatorios("Velocidad");
-        mazo.addAtributosObligatorios("Altura");
+        //mazo.addCartas(c8);
+
         //System.out.println(mazo.isAtributoPresente()+" "+mazo.isCantAtributosCorrecta());
 
         //se crean los jugadores

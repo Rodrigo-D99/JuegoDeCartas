@@ -8,36 +8,61 @@ public class Juego {
     private Mazo mazo;
     private final int MAXIMO_RONDAS;
     private Jugador j1,j2;
+    private ArrayList<Aumento> posimas;
 
     public Juego(Jugador j1, Jugador j2 , Mazo m) {
        this.j1=j1;
        this.j2=j2;
        this.mazo=m;
-        MAXIMO_RONDAS = m.getCartas().size()*2;
+       MAXIMO_RONDAS = m.getCartas().size()*2;
+    }
+
+    public Mazo getMazo() {
+        return mazo;
+    }
+
+    public Jugador getJ1() {
+        return j1;
+    }
+
+    public Jugador getJ2() {
+        return j2;
     }
 
     public int getMAXIMO_RONDAS() {
         return MAXIMO_RONDAS;
     }
 
+    public static int getTURNO() {
+        return TURNO;
+    }
+
     public void mezclarYrepartir(){
         ArrayList<Carta>aux=new ArrayList<>();
         ArrayList<Carta>aux2=new ArrayList<>();
         int j=0;
-        int i=1;
-        int k=1;
+        double i=0;
+        double i2=-1;
         double c= (double) mazo.getCartas().size()/2;
         while((aux.size() < (Math.ceil(c))) || (aux2.size() < Math.floor(c))){
             //evitar error Exception in thread "main" java.lang.IndexOutOfBoundsException
             if (j<=mazo.getCartas().size()) {
                 if (Math.random() > 0.45 ) {
-                    if (aux.size() != c)
+                    if (c%2!=0&&i%2==0)
+                        i=c+0.5;
+                    else
+                        i=c;
+                    if ( aux.size() != i)
                         aux.add(mazo.getCartas().get(j));
                     else
                         aux2.add(mazo.getCartas().get(j));
                 }
                 else {
-                    if (aux2.size() != c)
+                    if (c%2!=0&&i2%2!=0)
+                        i2=c-0.5;
+                    else
+                        i2=c;
+                    if (aux2.size() != i2)
                         aux2.add(mazo.getCartas().get(j));
                     else
                         aux.add(mazo.getCartas().get(j));

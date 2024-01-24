@@ -1,6 +1,7 @@
 package JuegoDeCartas.src.main.java.mazoDeCartas;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Mazo{
    private ArrayList<Carta> cartas;
@@ -24,9 +25,12 @@ public class Mazo{
     }
 
     public void addAtributosObligatorios(String atributo) {
-        this.atributosObligatorios.add(atributo) ;
+        this.atributosObligatorios.add(atributo.toUpperCase()) ;
     }
 
+    public void removeAtributosObligatorios(String atributo) {
+        this.atributosObligatorios.remove(atributo.toUpperCase());
+    }
     public int getCantMaxAtributos() {
         return cantMaxAtributos;
     }
@@ -47,10 +51,14 @@ public class Mazo{
     }
 
     public void addCartas(Carta c){
-        //if (isAtributoPresente()&&isCantAtributosCorrecta())
+        if (isCantAtributosCorrecta(c)&&isAtributoPresente(c))
             cartas.add(c);
+
     }
-    public void isCartaEsCorrecta(){
+
+
+    public void corregirMazo(){
+        //este metodo sirve si me cambian los atributos obligatorios
         ArrayList<Carta>aux=new ArrayList<>();
         for (Carta c:cartas){
             if(!c.isCantAtributosCorrecta(cantMaxAtributos)){
@@ -66,24 +74,16 @@ public class Mazo{
             }
         }
     }
-    public boolean isCantAtributosCorrecta(){
-        for (Carta c:cartas){
-            if (c.isCantAtributosCorrecta(cantMaxAtributos))
-                //no se si es necesario el if
-                return true;
-        }
-        return false;
+    public boolean isCantAtributosCorrecta(Carta c){
+        return c.getAtributos().size()==atributosObligatorios.size();
     }
 
-    public boolean isAtributoPresente(){
-        for (Carta c:cartas){
+    public boolean isAtributoPresente(Carta c){
             for (String s:atributosObligatorios) {
-                if (c.isAtributoPresente(s))
-                    //no se si es necesario el if
-                    return true;
+                if (!c.isAtributoPresente(s))
+                    return false;
             }
-        }
-        return false;
+        return true;
     }
 
     public void borrarCarta(Carta c){
