@@ -1,8 +1,21 @@
 package JuegoDeCartas.src.main.java.mazoDeCartas;
 
 
+import JuegoDeCartas.src.main.java.mazoDeCartas.filtros.Filtro;
+import JuegoDeCartas.src.main.java.mazoDeCartas.filtros.FiltroAtributo;
+import JuegoDeCartas.src.main.java.mazoDeCartas.posimas.*;
+import JuegoDeCartas.src.main.java.mazoDeCartas.tipoDeEstrategias.Ambicioso;
+import JuegoDeCartas.src.main.java.mazoDeCartas.tipoDeEstrategias.EstrategiaJuego;
+import JuegoDeCartas.src.main.java.mazoDeCartas.tipoDeEstrategias.Obstinado;
+import JuegoDeCartas.src.main.java.mazoDeCartas.tipoDeEstrategias.Timbero;
+
+import java.util.ArrayList;
+
 public class Main {
+
+        FiltroAtributo f;
     public static void main(String[] args) {
+
         //se crean las cartas
         Carta c=new Carta("goku");
         Carta c1=new Carta("vegeta");
@@ -27,7 +40,7 @@ public class Main {
         c2.addAtributos("Fuerza",500);
         c2.addAtributos("Inteligencia",400);
         c2.addAtributos("Velocidad",300);
-        c2.addAtributos("Altura",158);
+        c2.addAtributos("Altura",1580);
 
         c3.addAtributos("Fuerza",200);
         c3.addAtributos("Inteligencia",1000);
@@ -56,14 +69,17 @@ public class Main {
 
         c8.addAtributos("Fuerza",1000);
         c8.addAtributos("Inteligencia",600);
-        c8.addAtributos("Velocidad",800);
+        c8.addAtributos("Velocidad",1500);
         c8.addAtributos("Altura",178);
+
         //se crea el mazo
-        Mazo mazo=new Mazo(4);
+
+        Mazo mazo=new Mazo();
         mazo.addAtributosObligatorios("Fuerza");
         mazo.addAtributosObligatorios("Inteligencia");
         mazo.addAtributosObligatorios("Velocidad");
         mazo.addAtributosObligatorios("Altura");
+
         mazo.addCartas(c);
         mazo.addCartas(c1);
         mazo.addCartas(c2);
@@ -77,8 +93,22 @@ public class Main {
         //System.out.println(mazo.isAtributoPresente()+" "+mazo.isCantAtributosCorrecta());
 
         //se crean los jugadores
-        Jugador j1=new Jugador(4);
-        Jugador j2=new Jugador(4);
+
+        Obstinado o=new Obstinado("Obstinado");
+        Timbero t= new Timbero("Timbero");
+        Ambicioso a=new Ambicioso("Ambicioso");
+
+
+        Jugador j1=new Jugador();
+        Jugador j2=new Jugador();
+
+        j1.addTipoEstrategia(o);
+        j1.addTipoEstrategia(a);
+        j1.addTipoEstrategia(t);
+        j2.addTipoEstrategia(o);
+        j2.addTipoEstrategia(a);
+        j2.addTipoEstrategia(t);
+
         j1.setNombre("rodrigo");
         j2.setNombre("almen");
 
@@ -92,13 +122,31 @@ public class Main {
         j2.getMiniMazo().addAtributosObligatorios("Velocidad");
         j2.getMiniMazo().addAtributosObligatorios("Altura");
 
-        System.out.println("nombre de jugador 1: "+j1.getNombre());
-        System.out.println("nombre de jugador 2: "+j2.getNombre());
+        System.out.println("nombre de jugador 1: "+j1.getNombre()+" es un jugador "+j1.getTipoEstrategia().getNombre());
+        System.out.println("nombre de jugador 2: "+j2.getNombre()+" es un jugador "+j2.getTipoEstrategia().getNombre());
+
+
+        //se crean las posimas
+        PosimaNormal p1=new PosimaNormal("Fortalecedora",1.2);
+        PosimaNormal p2=new PosimaNormal("Fortalecedora plus",1.5);
+        PosimaNormal p3=new PosimaNormal("Debilitadora",0.75);
+        PosimaEstatica p4= new PosimaEstatica("Vale cuatro",4);
+        PosimaCompuesta p5=new PosimaCompuesta("Cocktail");
+        p5.addPosimas(p3);
+        p5.addPosimas(p1);
+        p5.addPosimas(p2);
+        //PosimaSelectiva p6=new PosimaSelectiva("Selectiva de Fuerza",1.55,);
 
         //se crea el juego
         Juego juego=new Juego(j1,j2,mazo);
+        juego.addPosimas(p1);
+        juego.addPosimas(p2);
+        juego.addPosimas(p3);
+        juego.addPosimas(p4);
+        juego.addPosimas(p5);
+
         //juego.play
-        if (!mazo.getCartas().isEmpty())
+       if (!mazo.getCartas().isEmpty())
             juego.mezclarYrepartir();
         //System.out.println("\n Mazo jugador 1 "+j1.getMiniMazo()+"\n\n"+"Mazo jugador 2 "+j2.getMiniMazo());
         for (int i=1;i<juego.getMAXIMO_RONDAS();i++) {

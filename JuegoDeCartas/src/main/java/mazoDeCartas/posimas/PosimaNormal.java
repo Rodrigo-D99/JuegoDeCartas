@@ -22,8 +22,13 @@ public class PosimaNormal extends ElementoPosima{
     @Override
     public void aplicarPosion(Carta c) {
         HashMap<String,Integer>temp=c.getAtributos();
+
         for (String s:temp.keySet()){
-            temp.replace(s, (int) (valorAumentado*temp.get(s)));
+            //si el valor es mayor a 1 aumenta sino reduce el valor del atributo
+            temp.replace(s,(int) (temp.get(s)*valorAumentado));
         }
+            c.setNomPosimaUsada(getNombre());
+            c.addAllAtributos(temp);
+
     }
 }

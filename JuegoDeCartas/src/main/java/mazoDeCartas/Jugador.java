@@ -1,18 +1,29 @@
 package JuegoDeCartas.src.main.java.mazoDeCartas;
 
 
+import JuegoDeCartas.src.main.java.mazoDeCartas.tipoDeEstrategias.EstrategiaJuego;
+
+import java.util.ArrayList;
+
 public class Jugador {
+
 
     private String nombre;
     private Mazo miniMazo;
-    public Jugador(int cantAtributos) {
+    private ArrayList<EstrategiaJuego> tipoEstrategia;
+    public Jugador() {
         this.setNombre(nombre);
-        this.miniMazo = new Mazo(cantAtributos);
+        this.miniMazo = new Mazo();
+        tipoEstrategia=new ArrayList<>();
     }
 
-    public String getAtributoElegido() {
-        int atributoAleatroio= (int) (Math.random()*miniMazo.getAtributosObligatorios().size());
-        return this.miniMazo.getAtributosObligatorios().get(atributoAleatroio);
+    public void addTipoEstrategia(EstrategiaJuego tipoEstrategia) {
+        this.tipoEstrategia.add(tipoEstrategia);
+    }
+
+    public EstrategiaJuego getTipoEstrategia() {
+        int estrategiaAleatoria=(int) (Math.random()*tipoEstrategia.size());
+        return tipoEstrategia.get(estrategiaAleatoria);
     }
 
     public String getNombre() {
@@ -34,6 +45,9 @@ public class Jugador {
     public Integer obtenerValorCarta(String a){
         return this.miniMazo.getPrimeraCarta().getAtributos().get(a);
     }
+    public Integer obtenerValorCartaModificada(String a){
+        return this.miniMazo.getPrimeraCarta().getAtributosModificados().get(a);
+    }
     public void addCartaGanada(Carta c){
         miniMazo.addCartas(c);
     }
@@ -41,7 +55,12 @@ public class Jugador {
     public void removerCarta(Carta c){
         miniMazo.borrarCarta(c);
     }
-
+    public boolean verificarSiSeAplicoPosima(){
+        return miniMazo.getPrimeraCarta().seAplicoPosima();
+    }
+    public String getNombPosimaUsadaCarta(){
+        return miniMazo.getPrimeraCarta().getNomPosimaUsada();
+    }
 
     public String toString(String s) {
 

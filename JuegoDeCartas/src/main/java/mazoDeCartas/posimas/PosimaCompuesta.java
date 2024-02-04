@@ -18,6 +18,7 @@ public class PosimaCompuesta extends ElementoPosima{
         for (ElementoPosima a: posimas){
                 a.aplicarPosion(c);
         }
+        c.setNomPosimaUsada(getNombre());
     }
 
     public ArrayList<ElementoPosima> getPosimas() {

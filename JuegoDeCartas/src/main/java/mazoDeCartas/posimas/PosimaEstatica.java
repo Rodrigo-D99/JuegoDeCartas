@@ -26,5 +26,8 @@ public class PosimaEstatica extends ElementoPosima{
         for (String s:temp.keySet()){
             temp.replace(s, valor);
         }
+        c.setNomPosimaUsada(getNombre());
+        c.addAllAtributos(temp);
+
     }
 }

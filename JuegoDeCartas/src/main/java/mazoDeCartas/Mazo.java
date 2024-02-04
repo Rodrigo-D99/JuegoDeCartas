@@ -14,10 +14,10 @@ public class Mazo{
         this.cantMaxAtributos = cantMaxAtributos;
     }
 
-    public Mazo(int cantMaxAtributos) {
+    public Mazo() {
         this.cartas=new ArrayList<>();
         this.atributosObligatorios =new ArrayList<>();
-        this.cantMaxAtributos = cantMaxAtributos;
+        setCantMaxAtributos();
     }
 
     public ArrayList<String> getAtributosObligatorios() {
@@ -35,19 +35,12 @@ public class Mazo{
         return cantMaxAtributos;
     }
 
-    public void setCantMaxAtributos(int cantMaxAtributos) {
-        this.cantMaxAtributos = cantMaxAtributos;
+    public void setCantMaxAtributos() {
+        this.cantMaxAtributos = atributosObligatorios.size();
     }
 
     public ArrayList<Carta> getCartas() {
         return new ArrayList<>(cartas);
-    }
-    public int getNumCartas() {
-        int suma=0;
-             for(Carta c: cartas){
-                 suma+=c.getNumCartas();
-             }
-        return suma;
     }
 
     public void addCartas(Carta c){
@@ -80,7 +73,7 @@ public class Mazo{
 
     public boolean isAtributoPresente(Carta c){
             for (String s:atributosObligatorios) {
-                if (!c.isAtributoPresente(s))
+                if (!c.isAtributoPresente(s.toUpperCase()))
                     return false;
             }
         return true;

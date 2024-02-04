@@ -2,6 +2,7 @@ package JuegoDeCartas.src.main.java.mazoDeCartas.posimas;
 
 import JuegoDeCartas.src.main.java.mazoDeCartas.Carta;
 
+
 public abstract class ElementoPosima {
     private String nombre;
     public abstract void aplicarPosion(Carta c);
