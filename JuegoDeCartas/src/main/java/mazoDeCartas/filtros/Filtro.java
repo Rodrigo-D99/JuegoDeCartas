@@ -5,5 +5,6 @@ import JuegoDeCartas.src.main.java.mazoDeCartas.Carta;
 import java.util.HashMap;
 
 public abstract class Filtro {
-    public abstract boolean cumple(Carta c);
+    //cumple de String porque se filtra por los atributos
+    public abstract boolean cumple(String c);
 }

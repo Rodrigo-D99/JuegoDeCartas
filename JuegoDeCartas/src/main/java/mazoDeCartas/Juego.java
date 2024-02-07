@@ -54,10 +54,11 @@ public class Juego {
         ArrayList<Carta>aux=new ArrayList<>();
         ArrayList<Carta>aux2=new ArrayList<>();
         int j=0;
-        double i=0;
-        double i2=-1;
+
         double c= (double) mazo.getCartas().size()/2;
         while((aux.size() < (Math.ceil(c))) || (aux2.size() < Math.floor(c))){
+            double i=0;
+            double i2=-1;
             //evitar error Exception in thread "main" java.lang.IndexOutOfBoundsException
             if (j<=mazo.getCartas().size()) {
                 if (Math.random() > 0.45 ) {

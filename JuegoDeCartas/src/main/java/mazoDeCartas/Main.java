@@ -25,7 +25,14 @@ public class Main {
         Carta c5=new Carta("trunks");
         Carta c6=new Carta("gohan");
         Carta c7=new Carta("picoro");
-        Carta c8=new Carta("aaaaaaaaaa");
+        Carta c8=new Carta("cell");
+        Carta c9=new Carta("frizzer");
+        Carta c10=new Carta("broly");
+        Carta c11=new Carta("yamcha");
+        Carta c12=new Carta("radits");
+        Carta c13=new Carta("Yo");
+        Carta c14=new Carta("bbbbbbbbb");
+        Carta c15=new Carta("aaaaaaaaaa");
 
         c.addAtributos("Fuerza",3000);
         c.addAtributos("Inteligencia",300);
@@ -72,6 +79,40 @@ public class Main {
         c8.addAtributos("Velocidad",1500);
         c8.addAtributos("Altura",178);
 
+        c9.addAtributos("Fuerza",500);
+        c9.addAtributos("Inteligencia",400);
+        c9.addAtributos("Velocidad",300);
+        c9.addAtributos("Altura",1580);
+
+        c10.addAtributos("Fuerza",200);
+        c10.addAtributos("Inteligencia",1000);
+        c10.addAtributos("Velocidad",150);
+        c10.addAtributos("Altura",166);
+
+        c11.addAtributos("Fuerza",400);
+        c11.addAtributos("Inteligencia",700);
+        c11.addAtributos("Velocidad",250);
+        c11.addAtributos("Altura",170);
+
+        c12.addAtributos("Fuerza",1500);
+        c12.addAtributos("Inteligencia",600);
+        c12.addAtributos("Velocidad",1000);
+        c12.addAtributos("Altura",178);
+
+        c13.addAtributos("Fuerza",1500);
+        c13.addAtributos("Inteligencia",900);
+        c13.addAtributos("Velocidad",1000);
+        c13.addAtributos("Altura",178);
+
+        c14.addAtributos("Fuerza",1000);
+        c14.addAtributos("Inteligencia",600);
+        c14.addAtributos("Velocidad",800);
+        c14.addAtributos("Altura",178);
+
+        c15.addAtributos("Fuerza",1000);
+        c15.addAtributos("Inteligencia",600);
+        c15.addAtributos("Velocidad",1500);
+        c15.addAtributos("Altura",178);
         //se crea el mazo
 
         Mazo mazo=new Mazo();
@@ -88,67 +129,87 @@ public class Main {
         mazo.addCartas(c5);
         mazo.addCartas(c6);
         mazo.addCartas(c7);
-        //mazo.addCartas(c8);
+        mazo.addCartas(c8);
+        mazo.addCartas(c9);
+        mazo.addCartas(c10);
+        mazo.addCartas(c11);
+        mazo.addCartas(c12);
+        mazo.addCartas(c13);
+        mazo.addCartas(c14);
+        mazo.addCartas(c15);
 
-        //System.out.println(mazo.isAtributoPresente()+" "+mazo.isCantAtributosCorrecta());
 
-        //se crean los jugadores
+        //se crean las estrategias
 
         Obstinado o=new Obstinado("Obstinado");
         Timbero t= new Timbero("Timbero");
         Ambicioso a=new Ambicioso("Ambicioso");
 
-
+        //se crean los jugadores
         Jugador j1=new Jugador();
         Jugador j2=new Jugador();
 
         j1.addTipoEstrategia(o);
         j1.addTipoEstrategia(a);
         j1.addTipoEstrategia(t);
+
         j2.addTipoEstrategia(o);
         j2.addTipoEstrategia(a);
         j2.addTipoEstrategia(t);
 
-        j1.setNombre("rodrigo");
-        j2.setNombre("almen");
-
-        j1.getMiniMazo().addAtributosObligatorios("Fuerza");
-        j1.getMiniMazo().addAtributosObligatorios("Inteligencia");
-        j1.getMiniMazo().addAtributosObligatorios("Velocidad");
-        j1.getMiniMazo().addAtributosObligatorios("Altura");
-
-        j2.getMiniMazo().addAtributosObligatorios("Fuerza");
-        j2.getMiniMazo().addAtributosObligatorios("Inteligencia");
-        j2.getMiniMazo().addAtributosObligatorios("Velocidad");
-        j2.getMiniMazo().addAtributosObligatorios("Altura");
+        j1.setNombre("Jugador 1");
+        j2.setNombre("Jugador 2");
+        //se setean automaticamente los atributos del mazo al minimazo del jugador
+        j1.getMiniMazo().addAllAtributosObligatorios(mazo.getAtributosObligatorios());
+        j2.getMiniMazo().addAllAtributosObligatorios(mazo.getAtributosObligatorios());
 
         System.out.println("nombre de jugador 1: "+j1.getNombre()+" es un jugador "+j1.getTipoEstrategia().getNombre());
         System.out.println("nombre de jugador 2: "+j2.getNombre()+" es un jugador "+j2.getTipoEstrategia().getNombre());
 
 
         //se crean las posimas
+        FiltroAtributo f=new FiltroAtributo("fuerza");
+        FiltroAtributo f2=new FiltroAtributo("inteligencia");
+
         PosimaNormal p1=new PosimaNormal("Fortalecedora",1.2);
         PosimaNormal p2=new PosimaNormal("Fortalecedora plus",1.5);
         PosimaNormal p3=new PosimaNormal("Debilitadora",0.75);
         PosimaEstatica p4= new PosimaEstatica("Vale cuatro",4);
         PosimaCompuesta p5=new PosimaCompuesta("Cocktail");
+
+        PosimaSelectiva p6=new PosimaSelectiva("Selectiva de Fuerza",1.55,f);
+        PosimaSelectiva p7=new PosimaSelectiva("Selectiva de Inteligencia",1.60,f2);
+
+        PosimaNormal p8=new PosimaNormal("Debilitadora plus",0.50);
+        PosimaCompuesta p9=new PosimaCompuesta("Cocktail2");
+        PosimaEstatica p10= new PosimaEstatica("Número Mágico",23);
+
         p5.addPosimas(p3);
         p5.addPosimas(p1);
         p5.addPosimas(p2);
-        //PosimaSelectiva p6=new PosimaSelectiva("Selectiva de Fuerza",1.55,);
+
+        p9.addPosimas(p5);
+        p9.addPosimas(p6);
+
 
         //se crea el juego
         Juego juego=new Juego(j1,j2,mazo);
+        //se le agregan las posimas
         juego.addPosimas(p1);
         juego.addPosimas(p2);
         juego.addPosimas(p3);
         juego.addPosimas(p4);
         juego.addPosimas(p5);
+        juego.addPosimas(p6);
+        juego.addPosimas(p7);
+        juego.addPosimas(p8);
+        juego.addPosimas(p9);
+        juego.addPosimas(p10);
 
         //juego.play
-       if (!mazo.getCartas().isEmpty())
+
+        if (!mazo.getCartas().isEmpty())
             juego.mezclarYrepartir();
-        //System.out.println("\n Mazo jugador 1 "+j1.getMiniMazo()+"\n\n"+"Mazo jugador 2 "+j2.getMiniMazo());
         for (int i=1;i<juego.getMAXIMO_RONDAS();i++) {
             if (j1.getMiniMazo().getPrimeraCarta()==null||j2.getMiniMazo().getPrimeraCarta()==null){
                 System.out.println("\nEl juego termino uno de los jugadores no tiene mas cartas");
@@ -159,8 +220,6 @@ public class Main {
                 juego.jugar(j1, j2);
             }
         }
-            //System.out.println("\n Mazo jugador 1 "+j1.getMiniMazo()+"\n\n"+"Mazo jugador 2 "+j2.getMiniMazo());
-
     }
 
 }

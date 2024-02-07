@@ -1,5 +1,4 @@
 package JuegoDeCartas.src.main.java.mazoDeCartas.filtros;
-
 import JuegoDeCartas.src.main.java.mazoDeCartas.Carta;
 
 public class FiltroAtributo extends Filtro{
@@ -9,10 +8,13 @@ public class FiltroAtributo extends Filtro{
         this.s = s;
     }
 
-    @Override
-    public boolean cumple(Carta c) {
-        return c.getAtributos().containsKey(s);
+    public String getS() {
+        return s;
     }
 
+    @Override
+    public boolean cumple(String c) {
+       return c.equalsIgnoreCase(s.toUpperCase());
+    }
 
 }

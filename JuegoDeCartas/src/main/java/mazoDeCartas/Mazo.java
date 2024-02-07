@@ -27,7 +27,9 @@ public class Mazo{
     public void addAtributosObligatorios(String atributo) {
         this.atributosObligatorios.add(atributo.toUpperCase()) ;
     }
-
+    public void addAllAtributosObligatorios(ArrayList<String> atributo) {
+        this.atributosObligatorios.addAll(atributo) ;
+    }
     public void removeAtributosObligatorios(String atributo) {
         this.atributosObligatorios.remove(atributo.toUpperCase());
     }
@@ -89,22 +91,6 @@ public class Mazo{
         }
         return this.getCartas().getFirst();
     }
-    /*public void mezclar(){
-        int posAleatoria=0;
-        Carta c;
-        for (Carta carta : cartas) {
-            posAleatoria = (int) (Math.random() * this.getNumCartas());
-            Carta pos=cartas.get(posAleatoria);
-
-            //c se vuelve la carta en pos 0
-            c = carta;
-            //la carta en pos 0 se vuelve la pos aleatoria
-            carta =pos;
-            //la carta en pos se pone en la pos 0
-            pos = c;
-        }
-    }*/
-
     @Override
     public String toString() {
         return "Mazo{" +
